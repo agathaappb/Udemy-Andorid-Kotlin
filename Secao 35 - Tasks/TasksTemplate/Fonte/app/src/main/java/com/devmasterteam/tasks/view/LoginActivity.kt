@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.devmasterteam.tasks.databinding.ActivityLoginBinding
 import com.devmasterteam.tasks.viewmodel.LoginViewModel
 
-class LoginActivity : AppCompatActivity(), View.OnClickListener {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var viewModel: LoginViewModel
     private lateinit var binding: ActivityLoginBinding
@@ -22,15 +22,19 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         // Layout
         setContentView(binding.root)
 
-        // Eventos
-        binding.buttonLogin.setOnClickListener(this)
-        binding.textRegister.setOnClickListener(this)
 
+        login()
         // Observadores
         observe()
     }
 
-    override fun onClick(v: View) {
+     fun login(){
+        binding.buttonLogin.setOnClickListener {
+            val email = binding.editEmail.text.toString()
+            val password = binding.editPassword.text.toString()
+
+            viewModel.doLogin(email, password)
+        }
     }
 
     private fun observe() {
