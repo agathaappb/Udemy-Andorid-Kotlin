@@ -25,10 +25,10 @@ class LoginActivity : AppCompatActivity() {
 
         // Layout
         setContentView(binding.root)
-
-
         login()
-        // Observadores
+
+        viewModel.verifyLoggedUser()
+
         observe()
     }
 
@@ -43,16 +43,25 @@ class LoginActivity : AppCompatActivity() {
     private fun observe() {
         viewModel.login.observe(this, Observer {
             if (it.status()){
-                startActivity(Intent(applicationContext, MainActivity::class.java))
-                finish()
+                startActivity()
             }else{
                 Toast.makeText(applicationContext,it.message(),Toast.LENGTH_SHORT).show()
             }
+        })
+
+        viewModel.loggedUser.observe(this, Observer {
+           if (it){
+               startActivity()
+           }
 
         })
 
 
 
+    }
 
+    fun startActivity(){
+        startActivity(Intent(applicationContext, MainActivity::class.java))
+        finish()
     }
 }
