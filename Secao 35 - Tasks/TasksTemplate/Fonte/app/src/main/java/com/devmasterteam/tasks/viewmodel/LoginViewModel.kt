@@ -54,6 +54,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         val token = securityPreferences.get(TaskConstants.SHARED.TOKEN_KEY)
         val personKey = securityPreferences.get(TaskConstants.SHARED.PERSON_KEY)
 
+        RetrofitClient.addHeaders(token,personKey)
+
         _loggedUser.value = (!token.isNullOrEmpty() && !personKey.isNullOrEmpty())
 
 

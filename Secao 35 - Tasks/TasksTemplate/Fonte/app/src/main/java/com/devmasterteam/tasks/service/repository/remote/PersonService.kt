@@ -13,6 +13,7 @@ interface PersonService {
     fun login(@Field("email") email: String, @Field("password") password: String): Call<PersonModel>
 
     @POST("Authentication/Create")
+    @FormUrlEncoded
     fun create(
         @Field("name") name: String,
         @Field("email") email: String,
